@@ -35,7 +35,6 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
         app = requireActivity().application
 
-
     }
 
 
@@ -44,11 +43,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-
-
-
-
-
 
         viewModel.dolarHoy.observe(viewLifecycleOwner,{
             binding.tvMontoDolar.text = montoToCLP(it.valor)
@@ -69,7 +63,30 @@ class HomeFragment : Fragment() {
             binding.tvMontoUtm.text = montoToCLP(it.valor)
         })
 
+        viewModel.bitcoinHoy.observe(viewLifecycleOwner, {
+            binding.tvMontoBitcoin.text = montoToCLP(it.valor)
+        })
+
         binding.cardViewdDolar.setOnClickListener {
+            viewModel.eleccionIndicador.value = 1
+            findNavController().navigate(R.id.action_homeFragment_to_listFragment)
+        }
+
+        binding.cardViewEuro.setOnClickListener {
+            viewModel.eleccionIndicador.value = 2
+            findNavController().navigate(R.id.action_homeFragment_to_listFragment)
+        }
+
+
+
+        binding.cardViewUf.setOnClickListener {
+            viewModel.eleccionIndicador.value = 3
+            findNavController().navigate(R.id.action_homeFragment_to_listFragment)
+        }
+
+
+        binding.cardViewUtm.setOnClickListener {
+            viewModel.eleccionIndicador.value = 4
             findNavController().navigate(R.id.action_homeFragment_to_listFragment)
         }
 

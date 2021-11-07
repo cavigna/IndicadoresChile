@@ -25,6 +25,9 @@ class ListFragment : Fragment() {
         IndiceModelFactory((app).appContainer.repository)
     }
 
+    private lateinit var recyclerView : RecyclerView
+    private lateinit var adapter: IndiceListAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,18 +40,48 @@ class ListFragment : Fragment() {
     ): View? {
         binding = FragmentListBinding.inflate(layoutInflater, container, false)
 
-        val recyclerView = binding.recyclerView
+        recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = IndiceListAdapter()
+         adapter = IndiceListAdapter()
 
         recyclerView.adapter = adapter
 
-        viewModel.listaDolar.observe(viewLifecycleOwner, {
-            adapter.submitList(it)
-        })
+        setAdapter(viewModel.eleccionIndicador.value!!)
 
 
         return binding.root
+    }
+
+    fun setAdapter(eleccion: Int){
+        when(eleccion){
+            1 -> {
+                viewModel.listaDolar.observe(viewLifecycleOwner, {
+                    adapter.eleccion = 1
+                    adapter.submitList(it)
+                })
+            }
+
+            2 ->{
+                viewModel.listaEuro.observe(viewLifecycleOwner, {
+                    adapter.eleccion = 2
+                    adapter.submitList(it)
+                })
+            }
+
+            3 ->{
+                viewModel.listaUf.observe(viewLifecycleOwner, {
+                    adapter.eleccion = 3
+                    adapter.submitList(it)
+                })
+            }
+
+            4 ->{
+                viewModel.listaUtm.observe(viewLifecycleOwner, {
+                    adapter.eleccion = 4
+                    adapter.submitList(it)
+                })
+            }
+        }
     }
 
 

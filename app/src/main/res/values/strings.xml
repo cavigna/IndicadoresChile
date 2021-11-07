@@ -7,4 +7,6 @@
     <string name="utm">UTM</string>
     <string name="dolar">Dolar</string>
     <string name="euro">Euro</string>
+    <string name="bitcoin">Bitcoin</string>
+    <string name="ethereum">Ethereum</string>
 </resources>

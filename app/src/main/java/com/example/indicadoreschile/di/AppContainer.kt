@@ -18,6 +18,11 @@ class AppContainer {
 
     }
 
+//    private val retrofitCrypto by lazy {
+//        Retrofit.Builder()
+//            .baseUrl()
+//    }
+
     val repository = Repository(retrofit)
 
     //val factory = IndiceViewModel(repository)

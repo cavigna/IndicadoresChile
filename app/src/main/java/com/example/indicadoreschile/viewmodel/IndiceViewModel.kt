@@ -20,12 +20,18 @@ class IndiceViewModel(private val repository: Repository): ViewModel() {
     private val _utmHoy = MutableLiveData<Indicador>()
     val utmHoy :LiveData<Indicador> = _utmHoy
 
-
     private val _dolarHoy : MutableLiveData<Indicador> = MutableLiveData<Indicador>()
     val dolarHoy: LiveData<Indicador> = _dolarHoy
 
     private val _euroHoy = MutableLiveData<Indicador>()
     val euroHoy: LiveData<Indicador> = _euroHoy
+
+    private val _bitcoinHoy = MutableLiveData<Indicador>()
+    val bitcoinHoy: LiveData<Indicador> = _bitcoinHoy
+
+    /* <======================================================>*/
+
+
 
     private val _listaUf = MutableLiveData<List<Indicador>>()
     val listaUf : LiveData<List<Indicador>> = _listaUf
@@ -39,6 +45,11 @@ class IndiceViewModel(private val repository: Repository): ViewModel() {
     private val _listaEuro = MutableLiveData<List<Indicador>>()
     val listaEuro : LiveData<List<Indicador>> = _listaEuro
 
+    private val _listaBitCoin = MutableLiveData<List<Indicador>>()
+    val listaBitcoin : LiveData<List<Indicador>> = _listaBitCoin
+
+    val eleccionIndicador = MutableLiveData<Int>()
+
 
 
 
@@ -47,6 +58,8 @@ class IndiceViewModel(private val repository: Repository): ViewModel() {
         listadoIndicador("euro", _euroHoy, _listaEuro)
         listadoIndicador("uf", _ufHoy, _listaUf)
         listadoIndicador("utm", _utmHoy, _listaUtm)
+        listadoIndicador("bitcoin", _bitcoinHoy, _listaBitCoin)
+        eleccionIndicador.postValue(0)
 
     }
 

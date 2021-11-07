@@ -7,6 +7,7 @@
     android:layout_margin="20dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardRow"
         android:layout_width="250dp"
         android:layout_height="100dp"
         android:layout_margin="20dp"
@@ -17,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/dashboard_item1">

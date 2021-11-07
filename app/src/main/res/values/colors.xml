@@ -15,6 +15,14 @@
     <color name="secondary_text">#9ca1b5</color>
     <color name="dashboard_item1">#01CD98</color>
     <color name="dashboard_item2">#5351FC</color>
-    <color name="dashboard_item3">#E64000</color>
-    <color name="dashboard_item4">#F6B000</color>
+    <color name="dashboard_item3">#F6B000</color>
+    <color name="dashboard_item4">#E64000</color>
+    <color name="dashboard_item5">#CB017A </color>
+    <color name="dashboard_item6">#9501CB</color>
+    <color name="dashboard_item7">#00A4E6</color>
+    <color name="dashboard_item8">#E600A4</color>
+
+
 </resources>
+
+<!--#CB017A-->
