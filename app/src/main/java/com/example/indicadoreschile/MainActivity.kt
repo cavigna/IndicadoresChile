@@ -2,10 +2,31 @@ package com.example.indicadoreschile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import com.example.indicadoreschile.databinding.ActivityMainBinding
+import com.example.indicadoreschile.di.IndiceApplication
+import com.example.indicadoreschile.viewmodel.IndiceModelFactory
+import com.example.indicadoreschile.viewmodel.IndiceViewModel
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
+    private val viewModel2: IndiceViewModel by viewModels{
+        IndiceModelFactory((application as IndiceApplication).appContainer.repository)
+    }
+
+    private val viewModel: IndiceViewModel by viewModels{
+        IndiceModelFactory((application as IndiceApplication).appContainer.repository)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        viewModel2.dolarHoy.observe(this, {
+            it.autor
+        })
     }
 }
