@@ -12,9 +12,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val viewModel2: IndiceViewModel by viewModels{
-        IndiceModelFactory((application as IndiceApplication).appContainer.repository)
-    }
+
 
     private val viewModel: IndiceViewModel by viewModels{
         IndiceModelFactory((application as IndiceApplication).appContainer.repository)
@@ -25,8 +23,5 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel2.dolarHoy.observe(this, {
-            it.autor
-        })
     }
 }

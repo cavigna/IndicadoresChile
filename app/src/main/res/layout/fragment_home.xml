@@ -74,7 +74,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewEuro"
-            style="@style/card_row"
+            style="@style/card_dash"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_weight="2"

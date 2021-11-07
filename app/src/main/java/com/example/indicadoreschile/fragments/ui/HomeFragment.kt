@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.example.indicadoreschile.R
 import com.example.indicadoreschile.databinding.FragmentHomeBinding
 import com.example.indicadoreschile.di.IndiceApplication
 import com.example.indicadoreschile.utils.montoToCLP
@@ -49,23 +51,27 @@ class HomeFragment : Fragment() {
 
 
         viewModel.dolarHoy.observe(viewLifecycleOwner,{
-            binding.tvMontoDolar.text = montoToCLP(it.indicador[0].valor)
+            binding.tvMontoDolar.text = montoToCLP(it.valor)
         })
 
         viewModel.euroHoy.observe(viewLifecycleOwner,{
-            binding.tvMontoEuro.text = montoToCLP(it.indicador[0].valor)
+            binding.tvMontoEuro.text = montoToCLP(it.valor)
         })
 
 
         viewModel.ufHoy.observe(viewLifecycleOwner, {
-            binding.tvMontoUf.text = it.indicador[0].valor.toInt().toString()
-            binding.tvMontoUf.text = montoToCLP(it.indicador[0].valor)
+
+            binding.tvMontoUf.text = montoToCLP(it.valor)
         })
 
 
         viewModel.utmHoy.observe(viewLifecycleOwner, {
-            binding.tvMontoUtm.text = it.indicador[0].valor.toString()
+            binding.tvMontoUtm.text = montoToCLP(it.valor)
         })
+
+        binding.cardViewdDolar.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_listFragment)
+        }
 
 
 
