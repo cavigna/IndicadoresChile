@@ -41,8 +41,18 @@ fun montoToCLP(monto: Double):String{
 }
 
 
+
+fun montoToUSD(monto: Double):String{
+    val format: NumberFormat = NumberFormat.getCurrencyInstance(Locale("es", "US"))
+    format.maximumFractionDigits = 0
+    //format.currency = Currency.getInstance( "CLP")
+
+    return format.format(monto.roundToInt())
+}
+
 @SuppressLint("NewApi")
 fun fechaApi(fechaLoca: String): String{
+    //"fecha": "2021-11-04T03:00:00.000Z", 04-11-2021
     val inputDate= DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH)
     val outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyy", Locale.ENGLISH)
     val fecha = LocalDate.parse(fechaLoca, inputDate)

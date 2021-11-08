@@ -1,10 +1,12 @@
 package com.example.indicadoreschile.viewmodel
 
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.indicadoreschile.model.Ethereum
 import com.example.indicadoreschile.model.Indicador
 import com.example.indicadoreschile.model.ResIndicador
 import com.example.indicadoreschile.repository.Repository
@@ -20,7 +22,7 @@ class IndiceViewModel(private val repository: Repository): ViewModel() {
     private val _utmHoy = MutableLiveData<Indicador>()
     val utmHoy :LiveData<Indicador> = _utmHoy
 
-    private val _dolarHoy : MutableLiveData<Indicador> = MutableLiveData<Indicador>()
+    val _dolarHoy : MutableLiveData<Indicador> = MutableLiveData<Indicador>()
     val dolarHoy: LiveData<Indicador> = _dolarHoy
 
     private val _euroHoy = MutableLiveData<Indicador>()
@@ -28,6 +30,11 @@ class IndiceViewModel(private val repository: Repository): ViewModel() {
 
     private val _bitcoinHoy = MutableLiveData<Indicador>()
     val bitcoinHoy: LiveData<Indicador> = _bitcoinHoy
+
+    private val _ethereumHoy = MutableLiveData<Ethereum>()
+    val ethereumHoy : LiveData<Ethereum> = _ethereumHoy
+
+
 
     /* <======================================================>*/
 
@@ -61,16 +68,27 @@ class IndiceViewModel(private val repository: Repository): ViewModel() {
         listadoIndicador("bitcoin", _bitcoinHoy, _listaBitCoin)
         eleccionIndicador.postValue(0)
 
+        //ethereumApi()
+
+        //dolarConstante = _dolarHoy.value!!.valor.toInt()
+
     }
 
 
     fun listadoIndicador(indicador: String, hoy: MutableLiveData<Indicador>, listado:MutableLiveData<List<Indicador>>){
+
         viewModelScope.launch {
             hoy.postValue((repository.listadoIndicador(indicador).indicador[0]))
             listado.postValue((repository.listadoIndicador(indicador).indicador))
         }
 
     }
+
+//    fun ethereumApi(){
+//        viewModelScope.launch {
+//            Log.i("cordoba", repository.ethereum().toString())
+//        }
+//    }
 
 }
 

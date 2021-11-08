@@ -1,10 +1,12 @@
 package com.example.indicadoreschile.di
 
+import com.example.indicadoreschile.network.CryptoApi
 import com.example.indicadoreschile.network.IndiceApi
 import com.example.indicadoreschile.repository.Repository
 import com.example.indicadoreschile.viewmodel.IndiceViewModel
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 
 class AppContainer {
 
@@ -18,12 +20,29 @@ class AppContainer {
 
     }
 
-//    private val retrofitCrypto by lazy {
-//        Retrofit.Builder()
-//            .baseUrl()
-//    }
 
-    val repository = Repository(retrofit)
+    private val retrofitCrypto by lazy {
+        Retrofit.Builder()
+            .baseUrl("https://api.coingecko.com/api/v3/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(CryptoApi::class.java)
+
+    }
+
+    val repository = Repository(retrofit, retrofitCrypto)
+
+    /*
+        DB
+
+        repositorio = Repository(retrofit, DB)
+     */
+
+
 
     //val factory = IndiceViewModel(repository)
 }
+
+/*
+https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd&include_24hr_change=true
+ */

@@ -15,6 +15,7 @@ import com.example.indicadoreschile.R
 import com.example.indicadoreschile.databinding.FragmentHomeBinding
 import com.example.indicadoreschile.di.IndiceApplication
 import com.example.indicadoreschile.utils.montoToCLP
+import com.example.indicadoreschile.utils.montoToUSD
 import com.example.indicadoreschile.viewmodel.IndiceModelFactory
 import com.example.indicadoreschile.viewmodel.IndiceViewModel
 
@@ -44,6 +45,17 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
 
+        ponerMontoCard()
+        enrutador()
+
+        //viewModel.ethereumApi()
+
+        return binding.root
+
+    }
+
+
+    private fun ponerMontoCard(){
         viewModel.dolarHoy.observe(viewLifecycleOwner,{
             binding.tvMontoDolar.text = montoToCLP(it.valor)
         })
@@ -64,9 +76,14 @@ class HomeFragment : Fragment() {
         })
 
         viewModel.bitcoinHoy.observe(viewLifecycleOwner, {
-            binding.tvMontoBitcoin.text = montoToCLP(it.valor)
+            //binding.tvMontoBitcoin.text = montoToCLP((it.valor).toInt() * viewModel.dolarHoy.value!!.valor )
+            binding.tvMontoBitcoin.text = montoToUSD((it.valor) )
         })
 
+
+    }
+
+    private fun enrutador(){
         binding.cardViewdDolar.setOnClickListener {
             viewModel.eleccionIndicador.value = 1
             findNavController().navigate(R.id.action_homeFragment_to_listFragment)
@@ -89,11 +106,6 @@ class HomeFragment : Fragment() {
             viewModel.eleccionIndicador.value = 4
             findNavController().navigate(R.id.action_homeFragment_to_listFragment)
         }
-
-
-
-        return binding.root
-
     }
 
 

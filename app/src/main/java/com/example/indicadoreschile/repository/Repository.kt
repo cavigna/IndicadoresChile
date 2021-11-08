@@ -1,19 +1,24 @@
 package com.example.indicadoreschile.repository
 
+import com.example.indicadoreschile.network.CryptoApi
 import com.example.indicadoreschile.network.IndiceApi
 
 
-class Repository(private val api: IndiceApi) {
+class Repository(private val api: IndiceApi, private val cryptoApi: CryptoApi) {
 
 
 
-    ////suspend fun ufDeHoy(fecha:String) = api.ufDeHoy(fecha)
 
-   // suspend fun indiceDeHoy(indice:String) = api.indiceDeHoy(indice, HOY)
 
     suspend fun listadoIndicador(indicador: String) = api.listadoIndicador(indicador)
+
+    //suspend fun ethereum() = cryptoApi.ethereum().request().url()
 }
 
 /*
     suspend fun listadoUf() = api.listadoUf()
+
+        ////suspend fun ufDeHoy(fecha:String) = api.ufDeHoy(fecha)
+
+   // suspend fun indiceDeHoy(indice:String) = api.indiceDeHoy(indice, HOY)
  */
