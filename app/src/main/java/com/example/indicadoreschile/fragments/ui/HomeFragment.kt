@@ -80,6 +80,10 @@ class HomeFragment : Fragment() {
             binding.tvMontoBitcoin.text = montoToUSD((it.valor) )
         })
 
+        viewModel.ethereumHoy.observe(viewLifecycleOwner, {
+            binding.tvMontoEth.text = montoToUSD(it.usd)
+        })
+
 
     }
 

@@ -12,7 +12,7 @@ class Repository(private val api: IndiceApi, private val cryptoApi: CryptoApi) {
 
     suspend fun listadoIndicador(indicador: String) = api.listadoIndicador(indicador)
 
-    //suspend fun ethereum() = cryptoApi.ethereum().request().url()
+    suspend fun ethereum() = cryptoApi.ethereum()
 }
 
 /*

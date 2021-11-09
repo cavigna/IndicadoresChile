@@ -68,7 +68,7 @@ class IndiceViewModel(private val repository: Repository): ViewModel() {
         listadoIndicador("bitcoin", _bitcoinHoy, _listaBitCoin)
         eleccionIndicador.postValue(0)
 
-        //ethereumApi()
+        ethereumApi()
 
         //dolarConstante = _dolarHoy.value!!.valor.toInt()
 
@@ -84,11 +84,11 @@ class IndiceViewModel(private val repository: Repository): ViewModel() {
 
     }
 
-//    fun ethereumApi(){
-//        viewModelScope.launch {
-//            Log.i("cordoba", repository.ethereum().toString())
-//        }
-//    }
+    fun ethereumApi(){
+        viewModelScope.launch {
+            _ethereumHoy.postValue(repository.ethereum().ethereum)
+        }
+    }
 
 }
 
