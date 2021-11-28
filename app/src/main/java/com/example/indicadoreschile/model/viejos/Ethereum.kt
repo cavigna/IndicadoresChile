@@ -1,4 +1,4 @@
-package com.example.indicadoreschile.model
+package com.example.indicadoreschile.model.viejos
 
 
 import com.google.gson.annotations.SerializedName

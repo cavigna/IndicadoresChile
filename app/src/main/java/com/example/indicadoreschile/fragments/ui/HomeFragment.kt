@@ -2,8 +2,10 @@ package com.example.indicadoreschile.fragments.ui
 
 
 import android.app.Application
+import android.os.Build
 
 import android.os.Bundle
+import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.indicadoreschile.R
 import com.example.indicadoreschile.databinding.FragmentHomeBinding
 import com.example.indicadoreschile.di.IndiceApplication
+import com.example.indicadoreschile.utils.Utilidades
 import com.example.indicadoreschile.utils.montoToCLP
 import com.example.indicadoreschile.utils.montoToUSD
 import com.example.indicadoreschile.viewmodel.IndiceModelFactory
@@ -28,7 +31,7 @@ class HomeFragment : Fragment() {
 
 
     private val viewModel : IndiceViewModel by activityViewModels {
-        IndiceModelFactory((app as IndiceApplication).appContainer.repository)
+        IndiceModelFactory((app as IndiceApplication).repository)
     }
 
 
@@ -37,6 +40,8 @@ class HomeFragment : Fragment() {
         app = requireActivity().application
 
     }
+
+
 
 
     override fun onCreateView(
@@ -50,13 +55,15 @@ class HomeFragment : Fragment() {
 
         //viewModel.ethereumApi()
 
+
+
         return binding.root
 
     }
 
 
     private fun ponerMontoCard(){
-        viewModel.dolarHoy.observe(viewLifecycleOwner,{
+        viewModel.usdHoy.observe(viewLifecycleOwner,{
             binding.tvMontoDolar.text = montoToCLP(it.valor)
         })
 
@@ -65,10 +72,10 @@ class HomeFragment : Fragment() {
         })
 
 
-        viewModel.ufHoy.observe(viewLifecycleOwner, {
-
-            binding.tvMontoUf.text = montoToCLP(it.valor)
-        })
+//        viewModel.ufHoyCMF.observe(viewLifecycleOwner, {
+//
+//            binding.tvMontoUf.text = montoToCLP(it.valor)
+//        })
 
 
         viewModel.utmHoy.observe(viewLifecycleOwner, {
@@ -84,6 +91,32 @@ class HomeFragment : Fragment() {
             binding.tvMontoEth.text = montoToUSD(it.usd)
         })
 
+//        viewModel.ufHoyCMF.observe(viewLifecycleOwner, {
+//            binding.tvMontoEth.text = montoToCLP(it.valor)
+//
+//            Log.i("prueba", it.valor.toString())
+//        })
+
+
+
+
+        binding.cardViewEth.setOnClickListener {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                viewModel.agregarUFADB()
+            }
+
+
+//            viewModel.ufHoyCMF.observe(viewLifecycleOwner, {
+//
+//
+//                Log.i("pruebados", it.valor.toString())
+//            })
+        }
+
+        Log.i("prueba", Utilidades.hoyLong.toString())
+
+        //viewModel.traerUFdeHoy()
 
     }
 

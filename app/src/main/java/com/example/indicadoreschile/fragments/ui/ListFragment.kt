@@ -22,7 +22,7 @@ class ListFragment : Fragment() {
     private lateinit var app : IndiceApplication
 
     private val viewModel : IndiceViewModel by activityViewModels {
-        IndiceModelFactory((app).appContainer.repository)
+        IndiceModelFactory((app).repository)
     }
 
     private lateinit var recyclerView : RecyclerView

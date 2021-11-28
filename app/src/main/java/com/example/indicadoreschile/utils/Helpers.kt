@@ -3,6 +3,10 @@ package com.example.indicadoreschile.utils
 import android.annotation.SuppressLint
 
 import android.icu.util.Calendar
+import android.os.Build
+import androidx.annotation.RequiresApi
+import java.text.DateFormat
+import java.text.DateFormat.getDateInstance
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -58,6 +62,23 @@ fun fechaApi(fechaLoca: String): String{
     val fecha = LocalDate.parse(fechaLoca, inputDate)
 
     return outputFormatter.format(fecha)
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun formateamelafecha(fechaString: String):Date{
+    //val inputTimeString = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH)
+    val date = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(fechaString)
+
+    return date
+    //val date = getDateInstance()
+
+}
+
+
+fun formateameElValor(string: String):Double{
+    val format = NumberFormat.getInstance(Locale.ITALIAN)
+    val number = format.parse(string)
+    return number.toDouble()
 }
 
 /*

@@ -13,8 +13,12 @@ class Utilidades {
         @SuppressLint("NewApi")
         val currentDate: Date = fromTimestamp(currentTime.timeInMillis)!!
 
-        val sdf = SimpleDateFormat("dd-MM-yyyy")
+
+
+        val sdf :SimpleDateFormat= SimpleDateFormat("dd-MM-yyyy")
         val HOY = sdf.format(currentDate)
+        val hoyLong =  SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH).parse(HOY).time
+
 
 
     }

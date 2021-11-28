@@ -14,9 +14,9 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    private val viewModel: IndiceViewModel by viewModels{
-        IndiceModelFactory((application as IndiceApplication).appContainer.repository)
-    }
+//    private val viewModel: IndiceViewModel by viewModels{
+//        IndiceModelFactory((application as IndiceApplication).appContainer.repository)
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,5 +1,7 @@
 package com.example.indicadoreschile.di
 
+import com.example.indicadoreschile.db.BaseDeDatos
+import com.example.indicadoreschile.network.CmfApiService
 import com.example.indicadoreschile.network.CryptoApi
 import com.example.indicadoreschile.network.IndiceApi
 import com.example.indicadoreschile.repository.Repository
@@ -30,7 +32,15 @@ class AppContainer {
 
     }
 
-    val repository = Repository(retrofit, retrofitCrypto)
+    private val retrofitCliente by lazy {
+        Retrofit.Builder()
+            .baseUrl("https://api.sbif.cl/api-sbifv3/recursos_api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(CmfApiService::class.java)
+    }
+
+
 
     /*
         DB

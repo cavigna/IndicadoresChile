@@ -1,9 +1,6 @@
 package com.example.indicadoreschile.network
 
-import com.example.indicadoreschile.model.Crypto
-import com.example.indicadoreschile.model.Ethereum
-import retrofit2.Call
-import retrofit2.Response
+import com.example.indicadoreschile.model.viejos.Crypto
 import retrofit2.http.GET
 import retrofit2.http.Query
 

@@ -3,10 +3,9 @@ package com.example.indicadoreschile.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.example.indicadoreschile.R
-import com.example.indicadoreschile.model.Indicador
+import com.example.indicadoreschile.model.viejos.Indicador2
 
-class IndiceListAdapter : ListAdapter<Indicador, MyViewHolder> (IndiceComparador()){
+class IndiceListAdapter : ListAdapter<Indicador2, MyViewHolder> (IndiceComparador()){
 
     var eleccion = 0
 
@@ -24,12 +23,12 @@ class IndiceListAdapter : ListAdapter<Indicador, MyViewHolder> (IndiceComparador
     }
 }
 
-class IndiceComparador: DiffUtil.ItemCallback<Indicador>() {
-    override fun areItemsTheSame(oldItem: Indicador, newItem: Indicador): Boolean {
+class IndiceComparador: DiffUtil.ItemCallback<Indicador2>() {
+    override fun areItemsTheSame(oldItem: Indicador2, newItem: Indicador2): Boolean {
         return oldItem ==  newItem
     }
 
-    override fun areContentsTheSame(oldItem: Indicador, newItem: Indicador): Boolean {
+    override fun areContentsTheSame(oldItem: Indicador2, newItem: Indicador2): Boolean {
         return oldItem.fecha == newItem.fecha
     }
 

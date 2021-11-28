@@ -1,7 +1,6 @@
 package com.example.indicadoreschile.adapter
 
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.indicadoreschile.R
 import com.example.indicadoreschile.databinding.ItemRowBinding
-import com.example.indicadoreschile.model.Indicador
+import com.example.indicadoreschile.model.viejos.Indicador2
 import com.example.indicadoreschile.utils.fechaApi
 import com.example.indicadoreschile.utils.montoToCLP
 
@@ -27,7 +26,7 @@ class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
     }
 
-    fun unidorDatos(indicador: Indicador, eleccionInicador: Int){
+    fun unidorDatos(indicador2: Indicador2, eleccionInicador: Int){
 
         when(eleccionInicador){
             1 -> {
@@ -48,8 +47,8 @@ class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
 
 
-        binding.textView.text =  fechaApi(indicador.fecha)
-        binding.textView2.text = montoToCLP(indicador.valor)
+        binding.textView.text =  fechaApi(indicador2.fecha)
+        binding.textView2.text = montoToCLP(indicador2.valor)
 
 
     }
