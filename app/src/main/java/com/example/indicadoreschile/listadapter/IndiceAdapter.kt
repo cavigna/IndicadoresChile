@@ -1,4 +1,4 @@
-package com.example.indicadoreschile.adapter
+package com.example.indicadoreschile.listadapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

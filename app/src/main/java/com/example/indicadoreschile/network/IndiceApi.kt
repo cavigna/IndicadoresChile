@@ -14,4 +14,12 @@ interface IndiceApi {
 
     @GET("{indicador}")
     suspend fun listadoIndicador(@Path("indicador") indicador: String): ResIndicador
+
+
+    @GET("{indicador}/{year}")
+    suspend fun listadoIndicadorAnual(
+        @Path("indicador") indicador :String,
+        @Path("year") year: Int
+
+    ) : ResIndicador
 }

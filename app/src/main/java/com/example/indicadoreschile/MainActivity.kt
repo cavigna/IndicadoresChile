@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.example.indicadoreschile.databinding.ActivityMainBinding
-import com.example.indicadoreschile.di.IndiceApplication
+import com.example.indicadoreschile.app.IndiceApplication
 import com.example.indicadoreschile.viewmodel.IndiceModelFactory
 import com.example.indicadoreschile.viewmodel.IndiceViewModel
 
@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private val viewModel: IndiceViewModel by viewModels{
-        IndiceModelFactory((application as IndiceApplication).appContainer.repository)
+        IndiceModelFactory((application as IndiceApplication).repository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

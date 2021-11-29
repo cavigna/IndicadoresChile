@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/detailsFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -19,4 +19,9 @@
         android:name="com.example.indicadoreschile.fragments.ui.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" />
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.indicadoreschile.fragments.ui.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" />
 </navigation>

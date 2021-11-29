@@ -13,8 +13,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.indicadoreschile.R
 import com.example.indicadoreschile.databinding.FragmentHomeBinding
-import com.example.indicadoreschile.di.IndiceApplication
+import com.example.indicadoreschile.app.IndiceApplication
 import com.example.indicadoreschile.utils.montoToCLP
+import com.example.indicadoreschile.utils.montoToCLP2
 import com.example.indicadoreschile.utils.montoToUSD
 import com.example.indicadoreschile.viewmodel.IndiceModelFactory
 import com.example.indicadoreschile.viewmodel.IndiceViewModel
@@ -28,9 +29,13 @@ class HomeFragment : Fragment() {
 
 
     private val viewModel : IndiceViewModel by activityViewModels {
+        IndiceModelFactory((app as IndiceApplication).repository)
+    }
+/*
+    private val viewModel : IndiceViewModel by activityViewModels {
         IndiceModelFactory((app as IndiceApplication).appContainer.repository)
     }
-
+ */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +53,7 @@ class HomeFragment : Fragment() {
         ponerMontoCard()
         enrutador()
 
+
         //viewModel.ethereumApi()
 
         return binding.root
@@ -56,28 +62,29 @@ class HomeFragment : Fragment() {
 
 
     private fun ponerMontoCard(){
-        viewModel.dolarHoy.observe(viewLifecycleOwner,{
-            binding.tvMontoDolar.text = montoToCLP(it.valor)
+
+        viewModel.ufHoy.observe(viewLifecycleOwner,{
+            // binding.tvMontoDolar.text = montoToCLP(it.valor)
+            binding.tvMontoUf.text = montoToCLP2( it.valor)
         })
 
-        viewModel.euroHoy.observe(viewLifecycleOwner,{
-            binding.tvMontoEuro.text = montoToCLP(it.valor)
+        viewModel.listadoDolar.observe(viewLifecycleOwner,{
+           // binding.tvMontoDolar.text = montoToCLP(it.valor)
+            binding.tvMontoDolar.text = montoToCLP2(it[0].valor)
+        })
+
+        viewModel.listadoEuro.observe(viewLifecycleOwner,{
+            binding.tvMontoEuro.text = montoToCLP2(it[0].valor)
         })
 
 
-        viewModel.ufHoy.observe(viewLifecycleOwner, {
-
-            binding.tvMontoUf.text = montoToCLP(it.valor)
+        viewModel.listadoUTM.observe(viewLifecycleOwner, {
+            binding.tvMontoUtm.text = montoToCLP2(it[0].valor)
         })
 
+        viewModel.listadoBitcoin.observe(viewLifecycleOwner, {
 
-        viewModel.utmHoy.observe(viewLifecycleOwner, {
-            binding.tvMontoUtm.text = montoToCLP(it.valor)
-        })
-
-        viewModel.bitcoinHoy.observe(viewLifecycleOwner, {
-            //binding.tvMontoBitcoin.text = montoToCLP((it.valor).toInt() * viewModel.dolarHoy.value!!.valor )
-            binding.tvMontoBitcoin.text = montoToUSD((it.valor) )
+            binding.tvMontoBitcoin.text = montoToUSD((it[0].valor) )
         })
 
         viewModel.ethereumHoy.observe(viewLifecycleOwner, {
@@ -114,3 +121,37 @@ class HomeFragment : Fragment() {
 
 
 }
+
+/*
+    private fun ponerMontoCard(){
+        viewModel.dolarHoy.observe(viewLifecycleOwner,{
+            binding.tvMontoDolar.text = montoToCLP(it.valor)
+        })
+
+        viewModel.euroHoy.observe(viewLifecycleOwner,{
+            binding.tvMontoEuro.text = montoToCLP(it.valor)
+        })
+
+
+        viewModel.ufHoy.observe(viewLifecycleOwner, {
+
+            binding.tvMontoUf.text = montoToCLP(it.valor)
+        })
+
+
+        viewModel.utmHoy.observe(viewLifecycleOwner, {
+            binding.tvMontoUtm.text = montoToCLP(it.valor)
+        })
+
+        viewModel.bitcoinHoy.observe(viewLifecycleOwner, {
+            //binding.tvMontoBitcoin.text = montoToCLP((it.valor).toInt() * viewModel.dolarHoy.value!!.valor )
+            binding.tvMontoBitcoin.text = montoToUSD((it.valor) )
+        })
+
+        viewModel.ethereumHoy.observe(viewLifecycleOwner, {
+            binding.tvMontoEth.text = montoToUSD(it.usd)
+        })
+
+
+    }
+ */

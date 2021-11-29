@@ -1,17 +1,18 @@
-package com.example.indicadoreschile.di
+package com.example.indicadoreschile.app
 
+import android.app.Application
+import com.example.indicadoreschile.db.BaseDeDatos
 import com.example.indicadoreschile.network.CryptoApi
 import com.example.indicadoreschile.network.IndiceApi
 import com.example.indicadoreschile.repository.Repository
-import com.example.indicadoreschile.viewmodel.IndiceViewModel
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
-class AppContainer {
+class IndiceApplication : Application() {
 
+    //val appContainer = AppContainer(this)
 
-    private val retrofit by lazy    {
+    private val retrofit by lazy {
         Retrofit.Builder()
             .baseUrl("https://mindicador.cl/api/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -30,19 +31,7 @@ class AppContainer {
 
     }
 
-    val repository = Repository(retrofit, retrofitCrypto)
+    private val database by lazy {  BaseDeDatos.getDataBase(this) }
 
-    /*
-        DB
-
-        repositorio = Repository(retrofit, DB)
-     */
-
-
-
-    //val factory = IndiceViewModel(repository)
+    val repository by lazy { Repository(retrofit, retrofitCrypto, database.dao()) }
 }
-
-/*
-https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd&include_24hr_change=true
- */

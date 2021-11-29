@@ -1,22 +1,56 @@
 package com.example.indicadoreschile.viewmodel
 
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.accounts.NetworkErrorException
+import androidx.lifecycle.*
 import com.example.indicadoreschile.model.Ethereum
-import com.example.indicadoreschile.model.Indicador
-import com.example.indicadoreschile.model.ResIndicador
 import com.example.indicadoreschile.repository.Repository
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
+
+
+class IndiceViewModel(private val repositorio: Repository): ViewModel() {
+
+    private val _ethereumHoy = MutableLiveData<Ethereum>()
+    val ethereumHoy : LiveData<Ethereum> = _ethereumHoy
+
+    val ufHoy = repositorio.ufHoy().asLiveData()
+    val listadoUf = repositorio.listadoUF().asLiveData()
+    val listadoUTM = repositorio.listadoUTM().asLiveData()
+    val listadoDolar = repositorio.listadoDolar().asLiveData()
+    val listadoEuro = repositorio.listadoEuro().asLiveData()
+    val listadoBitcoin = repositorio.listadoBitcoin().asLiveData()
 
 
 
-class IndiceViewModel(private val repository: Repository): ViewModel() {
+    val eleccionIndicador = MutableLiveData<Int>()
 
-    private val _ufHoy: MutableLiveData<Indicador> = MutableLiveData()
+    init {
+
+        viewModelScope.launch {
+            ethereumApi()
+            try {
+                repositorio.agregarDB()
+            } catch (socket: SocketTimeoutException){
+
+            }catch (errorInternet: NetworkErrorException){
+
+            }
+        }
+    }
+
+
+
+    fun ethereumApi(){
+        viewModelScope.launch {
+            _ethereumHoy.postValue(repositorio.ethereum().ethereum)
+        }
+    }
+
+}
+
+/*
+private val _ufHoy: MutableLiveData<Indicador> = MutableLiveData()
     val ufHoy : LiveData<Indicador> = _ufHoy
 
     private val _utmHoy = MutableLiveData<Indicador>()
@@ -89,8 +123,7 @@ class IndiceViewModel(private val repository: Repository): ViewModel() {
             _ethereumHoy.postValue(repository.ethereum().ethereum)
         }
     }
-
-}
+ */
 
 /*
 class IndiceViewModel(private val repository: Repository): ViewModel() {

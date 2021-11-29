@@ -1,9 +1,8 @@
-package com.example.indicadoreschile.adapter
+package com.example.indicadoreschile.listadapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.example.indicadoreschile.R
 import com.example.indicadoreschile.model.Indicador
 
 class IndiceListAdapter : ListAdapter<Indicador, MyViewHolder> (IndiceComparador()){
